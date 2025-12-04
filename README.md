@@ -1,4 +1,4 @@
-#Employee leave calculator app
+# Employee leave calculator app
 
-##Python and mysql server as used technologies
+## Python and mysql server as used technologies
 
