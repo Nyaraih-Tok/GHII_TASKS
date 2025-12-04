@@ -22,7 +22,25 @@ def get_leave_info(emp_id, start_date, end_date):
     """, (emp_id, start_date, end_date))
     taken = cur.fetchone()[0]
     
-    
-    
-    
+    # last balance remaining for the employee
+    cur.execute("""
+        SELECT remaining_leave_days
+        FROM LeaveBalance
+        WHERE employee_id = %s
+        ORDER BY current_date DESC
+        LIMIT 1
+    """, (emp_id,))
+    row = cur.fetchone()
+    if row is not None:
+        remaining = row[0]
+    else:
+        remaining = 0
+
+    cur.close()
+    conn.close()
+
+    return {
+        "taken_days": taken,
+        "remaining_days": remaining
+    }
     
